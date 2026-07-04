@@ -1,0 +1,337 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Inter", system-ui, -apple-system, "SF Pro Display", sans-serif;
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+/*
+ * Paleta clean-tech minimalista: grafite, carvão e azul-petróleo suave.
+ * Inspirada em Linear, Stripe e Apple. Sem neon, sem brilhos saturados.
+ *
+ * Nota de acessibilidade: todos os pares texto/fundo abaixo foram calculados
+ * (conversão OKLCH → sRGB → luminância relativa WCAG) para garantir
+ * contraste ≥ 4.5:1 em texto e ≥ 3:1 em bordas/limites de componente.
+ */
+:root {
+  --radius: 0.75rem;
+
+  /* Base — preto grafite */
+  --background: oklch(0.16 0.005 240);
+  --foreground: oklch(0.96 0.003 240);
+
+  --card: oklch(0.22 0.006 240);
+  --card-foreground: oklch(0.96 0.003 240);
+
+  --popover: oklch(0.21 0.006 240);
+  --popover-foreground: oklch(0.96 0.003 240);
+
+  /* Primary — azul petróleo suave e sóbrio */
+  --primary: oklch(0.72 0.07 215);
+  --primary-foreground: oklch(0.15 0.005 240);
+
+  /* Secondary — carvão */
+  --secondary: oklch(0.26 0.008 240);
+  --secondary-foreground: oklch(0.96 0.003 240);
+
+  --muted: oklch(0.25 0.006 240);
+  --muted-foreground: oklch(0.70 0.01 240);
+
+  /* Accent — ajustado de L0.55/C0.06 para L0.62/C0.08 e foreground escuro:
+     o par anterior (accent-foreground claro sobre accent) media 4.48:1,
+     abaixo do mínimo AA (4.5:1). Agora 5.5:1+. */
+  --accent: oklch(0.62 0.08 215);
+  --accent-foreground: oklch(0.15 0.005 240);
+
+  /* Destructive — ajustado de L0.62 para L0.65 e foreground escuro
+     (mesmo padrão usado em primary/success/warning): par anterior
+     (branco sobre destructive) media 3.75:1, abaixo do mínimo AA.
+     Agora 5.5:1+, e o uso como texto puro sobre o fundo também melhora
+     (3.65:1 → 5.49:1). */
+  --destructive: oklch(0.65 0.18 25);
+  --destructive-foreground: oklch(0.15 0.005 240);
+
+  --success: oklch(0.68 0.12 160);
+  --success-foreground: oklch(0.15 0.005 240);
+  --warning: oklch(0.78 0.12 80);
+  --warning-foreground: oklch(0.15 0.005 240);
+
+  /* Border/Input — ajustados de 8%/10% (contraste ~1.2:1, quase invisível)
+     para 38%/42% (contraste ≥3.3:1), atendendo WCAG 1.4.11 (contraste
+     não-textual mínimo para limites de componentes de interface). */
+  --border: oklch(1 0 0 / 38%);
+  --input: oklch(1 0 0 / 42%);
+  --ring: oklch(0.72 0.07 215);
+
+  /* Tons de nota de acessibilidade — usados pelo componente
+     AccessibilityScoreBadge para diferenciar visualmente as faixas. */
+  --score-high: var(--success);
+  --score-high-foreground: var(--success-foreground);
+  --score-mid: var(--primary);
+  --score-mid-foreground: var(--primary-foreground);
+  --score-entry: var(--warning);
+  --score-entry-foreground: var(--warning-foreground);
+
+  --shadow-soft: 0 1px 2px oklch(0 0 0 / 0.3), 0 8px 24px -12px oklch(0 0 0 / 0.5);
+  --shadow-card: 0 1px 2px oklch(0 0 0 / 0.4), 0 20px 40px -24px oklch(0 0 0 / 0.6);
+
+  --a11y-font-scale: 1;
+  --a11y-tap-scale: 1;
+  --a11y-spacing-scale: 1;
+}
+
+/* ====== Modo alto contraste ====== */
+.a11y-high-contrast {
+  --background: oklch(0 0 0);
+  --foreground: oklch(1 0 0);
+  --card: oklch(0.05 0 0);
+  --card-foreground: oklch(1 0 0);
+  --popover: oklch(0.05 0 0);
+  --popover-foreground: oklch(1 0 0);
+  --primary: oklch(0.95 0.2 95);
+  --primary-foreground: oklch(0 0 0);
+  --secondary: oklch(0.15 0 0);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.12 0 0);
+  --muted-foreground: oklch(0.95 0 0);
+  --accent: oklch(0.95 0.2 95);
+  --accent-foreground: oklch(0 0 0);
+  /* Border mais visível que o padrão; input ainda mais (é o limite que
+     identifica um campo preenchível — critério mais estrito). */
+  --border: oklch(1 0 0 / 70%);
+  --input: oklch(1 0 0 / 85%);
+  --ring: oklch(0.95 0.2 95);
+  --score-high: oklch(0.95 0.2 95);
+  --score-high-foreground: oklch(0 0 0);
+  --score-mid: oklch(0.95 0.2 95);
+  --score-mid-foreground: oklch(0 0 0);
+  --score-entry: oklch(0.95 0.2 95);
+  --score-entry-foreground: oklch(0 0 0);
+}
+
+/* ====== Daltonismo ====== */
+.a11y-protanopia { filter: url(#cb-protanopia); }
+.a11y-deuteranopia { filter: url(#cb-deuteranopia); }
+.a11y-tritanopia { filter: url(#cb-tritanopia); }
+
+/* ====== Modo cegueira (simulação) ======
+   Importante: aplicado em #app-shell (conteúdo navegável), NUNCA em
+   <html>/<body>. Isso garante que o botão flutuante de acessibilidade
+   e o painel (que ficam fora do #app-shell) continuem visíveis e
+   clicáveis mesmo com a simulação ativa — é a "saída de emergência"
+   do modo. Ver Layout.tsx e AccessibilityContext.tsx. */
+#app-shell.a11y-blind-sim { filter: brightness(0.04); }
+#app-shell.a11y-blind-sim * { cursor: none !important; }
+
+/* ====== Baixa visão ====== */
+html { font-size: calc(16px * var(--a11y-font-scale)); }
+.a11y-low-vision {
+  --a11y-font-scale: 1.35;
+  --a11y-tap-scale: 1.25;
+  --a11y-spacing-scale: 1.4;
+  letter-spacing: 0.02em;
+  line-height: 1.7;
+}
+.a11y-low-vision button,
+.a11y-low-vision a[role="button"],
+.a11y-low-vision .btn {
+  min-height: calc(48px * var(--a11y-tap-scale));
+  padding: calc(0.75rem * var(--a11y-spacing-scale)) calc(1.5rem * var(--a11y-spacing-scale));
+}
+
+/* ====== Foco visível ====== */
+:focus-visible {
+  outline: 2px solid var(--ring) !important;
+  outline-offset: 3px !important;
+  border-radius: 6px;
+}
+
+/* ====== Movimento reduzido ======
+   Recomendação WCAG 2.3.3 (AAA), aplicada por boa prática mesmo não
+   sendo obrigatória em AA: respeita a preferência do sistema e remove
+   animações decorativas, mantendo apenas o essencial quase instantâneo. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+}
+.skip-link:focus { left: 1rem; top: 1rem; }
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  h1, h2, h3, h4 {
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    line-height: 1.15;
+  }
+  h1 { letter-spacing: -0.03em; }
+  p { line-height: 1.65; }
+}
+
+/* Glass refinado e discreto */
+.glass {
+  background: oklch(0.18 0.006 240 / 0.72);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--border);
+}
+
+/* Card hover sutil */
+.card-hover {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-card);
+  border-color: oklch(1 0 0 / 0.45);
+}
+
+/* Botão primário minimalista */
+.btn-primary {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-radius: 0.625rem;
+  padding: 0.75rem 1.25rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+.btn-primary:hover { background: oklch(0.78 0.07 215); box-shadow: var(--shadow-soft); }
+.btn-primary:active { transform: scale(0.98); }
+.btn-primary:disabled { opacity: 0.45; cursor: not-allowed; }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: 0.625rem;
+  padding: 0.75rem 1.25rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.btn-ghost:hover { background: oklch(1 0 0 / 0.06); border-color: oklch(1 0 0 / 0.5); }
+.btn-ghost:active { transform: scale(0.98); }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-scale-in { animation: scale-in 0.18s cubic-bezier(0.16, 1, 0.3, 1) both; }
+
+/* Grain sutil opcional para cinematic feel */
+.noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+}
+
+/* Gradiente de texto — real e legível: aplicado apenas a títulos grandes
+   (display), nunca a corpo de texto, então a leve perda de contraste no
+   meio do gradiente não compromete legibilidade (mantém ambos os extremos
+   dentro de tons claros sobre o fundo escuro). */
+.text-gradient {
+  background: linear-gradient(135deg, var(--foreground) 25%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.glow-hover { transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; }
+.glow-hover:hover { transform: translateY(-2px); box-shadow: var(--shadow-card); border-color: oklch(1 0 0 / 0.45); }
+.animate-pulse-glow { /* no-op para visual minimalista */ }
+
+/* Atalhos de teclado — classe única centralizada (antes duplicada e
+   dessincronizada entre AccessibilityPanel.tsx e acessibilidade.tsx). */
+.kbd {
+  background: var(--muted);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+  margin-right: 0.4rem;
+  white-space: nowrap;
+}
+
+.btn-mini {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.4rem 0.7rem;
+  font-size: 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.btn-mini:hover { background: var(--muted); }
+.btn-mini:active { transform: scale(0.97); }
